@@ -5,42 +5,54 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="match_parent"
+        android:text="word"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:textSize="30sp"
         android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:id="@+id/word"/>
+
+    <TextView
+        android:text="progress: 14/36\nmistakes: 1"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:id="@+id/score"
+        android:layout_toRightOf="@+id/word"
+        android:gravity="right|center"
+        android:paddingRight="10dp"/>
 
     <LinearLayout
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/adapter">
 
         <Button
-            android:text="@string/lessons"
+            android:text="1"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:id="@+id/opt1"/>
 
         <Button
-            android:text="@string/statistics"
+            android:text="2"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:id="@+id/opt2" />
 
         <Button
-            android:text="@string/exit"
+            android:text="3"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:id="@+id/opt3" />
     </LinearLayout>
 
-    <TextView
+    <Button
+        android:text="Next"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:id="@+id/result"/>
+        android:layout_alignParentBottom="true"
+        android:id="@+id/next"/>
 
 </RelativeLayout>
