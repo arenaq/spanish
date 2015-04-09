@@ -2,16 +2,18 @@ package org.arenaq.czu.spanelstina;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.Button;
 import android.widget.TextView;
+
+import org.arenaq.czu.spanelstina.database.Database;
+import org.arenaq.czu.spanelstina.database.model.Lecture;
 
 /**
  * Created by arenaq on 30.3.2015.
  */
 public class LessonActivity extends Activity {
+    Database db;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -19,42 +21,18 @@ public class LessonActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
 
+        TextView tvWord = (TextView)findViewById(R.id.word);
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        db = new Database(this);
 
-        int lesson = getIntent().getIntExtra("LESSON", 1);
-        Resources res = getResources();
-        String[] espanol;
-        String[] czech;
+        int lectureId = getIntent().getIntExtra("lesson_id", -1);
 
-        switch (lesson) {
-            case 1:
-                espanol = res.getStringArray(R.array.lesson1_es);
-                czech = res.getStringArray(R.array.lesson1_cs);
-                break;
-            case 2:
-                espanol = res.getStringArray(R.array.lesson2_es);
-                czech = res.getStringArray(R.array.lesson2_cs);
-                break;
-            case 3:
-                espanol = res.getStringArray(R.array.lesson3_es);
-                czech = res.getStringArray(R.array.lesson3_cs);
-                break;
-            default:
-                espanol = res.getStringArray(R.array.lesson1_es);
-                czech = res.getStringArray(R.array.lesson1_cs);
-                break;
+        if (lectureId > 0) {
+            Lecture lecture = db.getLecture(lectureId);
+            String text = "WORD COUNT: " + lecture.getWords().size();
+            tvWord.setText(text);
         }
-
-        TextView word = (TextView)findViewById(R.id.word);
-        Button opt1 = (Button)findViewById(R.id.opt1);
-        Button opt2 = (Button)findViewById(R.id.opt2);
-        Button opt3 = (Button)findViewById(R.id.opt3);
-        TextView result = (TextView)findViewById(R.id.result);
-
-        word.setText(czech[0]);
-        opt1.setText(espanol[1]);
-        opt2.setText(espanol[2]);
-        opt3.setText(espanol[3]);
     }
 
 }
