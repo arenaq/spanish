@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import org.arenaq.czu.spanelstina.database.Database;
+import org.arenaq.czu.spanelstina.database.model.Lecture;
+
+import java.util.List;
+
 
 public class MainActivity extends Activity {
 
@@ -46,12 +51,19 @@ public class MainActivity extends Activity {
     }
 
     protected Dialog pickLesson() {
+        Database db = new Database(this);
+        List<Lecture> lectures = db.getAllLectures();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.lessons_dialog_title);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_item);
-        arrayAdapter.add(getResources().getString(R.string.lesson1));
-        arrayAdapter.add(getResources().getString(R.string.lesson2));
-        arrayAdapter.add(getResources().getString(R.string.lesson3));
+
+        int i = 1;
+        for (Lecture lecture : lectures) {
+            arrayAdapter.add("Lecture " + i + ": " + lecture.getName());
+            i++;
+        }
+
         builder.setNeutralButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -63,7 +75,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(MainActivity.this, LessonActivity.class);
-                intent.putExtra("LESSON", which+1);
+                intent.putExtra("lesson_id", which+1);
                 startActivity(intent);
             }
         });
