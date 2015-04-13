@@ -14,7 +14,7 @@
         android:id="@+id/word"/>
 
     <TextView
-        android:text="progress: 14/36\nmistakes: 1"
+        android:text="14/36\nM: 1"
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:id="@+id/score"

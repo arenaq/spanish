@@ -142,7 +142,7 @@ public class LessonActivity extends Activity implements View.OnClickListener {
     }
 
     private void redrawScore() {
-        tvScore.setText("progress: " + progress + "/" + words.size() + "\nmistakes: " + mistakes);
+        tvScore.setText(progress + "/" + words.size() + "\nM: " + mistakes);
     }
 
     private void disableAll() {
