@@ -46,6 +46,18 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:id="@+id/opt3" />
+
+        <Button
+            android:text="4"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/opt4" />
+
+        <Button
+            android:text="5"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/opt5" />
     </LinearLayout>
 
     <Button
