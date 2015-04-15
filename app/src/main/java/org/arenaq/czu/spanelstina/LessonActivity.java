@@ -25,7 +25,7 @@ public class LessonActivity extends Activity implements View.OnClickListener {
     private int mistakes;
     private List<Word> words;
     private List<Word> usedWords;
-    private List<Word> wordOptions;
+    private List<Word> currentWordOptions;
     private boolean answerFound = false;
     private Word current;
     Database db;
@@ -65,7 +65,7 @@ public class LessonActivity extends Activity implements View.OnClickListener {
 
 
         usedWords = new ArrayList<Word>();
-        wordOptions = new ArrayList<Word>();
+        currentWordOptions = new ArrayList<Word>();
 
         //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         db = new Database(this);
@@ -107,7 +107,7 @@ public class LessonActivity extends Activity implements View.OnClickListener {
     }
 
     private void nextRound() {
-        wordOptions.clear();
+        currentWordOptions.clear();
 
         current = pickRandomWord(usedWords);
         usedWords.add(current);
@@ -123,12 +123,13 @@ public class LessonActivity extends Activity implements View.OnClickListener {
         long seed = System.nanoTime();
         Collections.shuffle(shuffledList, new Random(seed));
 
-        shuffledList.get(0).setBackgroundResource(android.R.drawable.btn_default);
-        shuffledList.get(0).setText(current.getSpanish());
-        shuffledList.get(0).setEnabled(true);
+        Button right_answer = shuffledList.get(0);
+        right_answer.setBackgroundResource(android.R.drawable.btn_default);
+        right_answer.setText(current.getSpanish());
+        right_answer.setEnabled(true);
 
         for (int i = 1; i < shuffledList.size(); i++) {
-            Word word = pickRandomWord(wordOptions);
+            Word word = pickRandomWord(currentWordOptions);
             Button button = shuffledList.get(i);
             button.setBackgroundResource(android.R.drawable.btn_default);
             button.setText(word.getSpanish());
