@@ -128,8 +128,11 @@ public class LessonActivity extends Activity implements View.OnClickListener {
         right_answer.setText(current.getSpanish());
         right_answer.setEnabled(true);
 
+        currentWordOptions.add(current);
+
         for (int i = 1; i < shuffledList.size(); i++) {
             Word word = pickRandomWord(currentWordOptions);
+            currentWordOptions.add(word);
             Button button = shuffledList.get(i);
             button.setBackgroundResource(android.R.drawable.btn_default);
             button.setText(word.getSpanish());
