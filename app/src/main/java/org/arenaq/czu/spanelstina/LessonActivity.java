@@ -159,7 +159,7 @@ public class LessonActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (((Button) v).getText() == current.getSpanish()) {
+        if (current.getSpanish().compareTo(((Button) v).getText().toString()) == 0) {
             v.setBackgroundColor(Color.GREEN);
             answerFound = true;
             disableAll();
