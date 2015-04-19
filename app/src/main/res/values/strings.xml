@@ -6,9 +6,6 @@
     <string name="exit">Konec</string>
     <string name="statistics">Statistika</string>
     <string name="lessons">Lekce</string>
-    <string name="lesson1">Lekce 1</string>
-    <string name="lesson2">Lekce 2</string>
-    <string name="lesson3">Lekce 3</string>
     <string name="lessons_dialog_title">Vyber si lekci</string>
     <string name="dialog_cancel">Zrušit</string>
 
