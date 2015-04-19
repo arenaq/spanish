@@ -8,5 +8,7 @@
     <string name="lessons">Lekce</string>
     <string name="lessons_dialog_title">Vyber si lekci</string>
     <string name="dialog_cancel">Zrušit</string>
+    <string name="pref_language">Jazyk</string>
+    <string name="pref_revert">Otočit směr překladu</string>
 
 </resources>

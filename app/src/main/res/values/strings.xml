@@ -8,5 +8,7 @@
     <string name="lessons">Lesson</string>
     <string name="lessons_dialog_title">Choose a lesson</string>
     <string name="dialog_cancel">Cancel</string>
+    <string name="pref_language">Language</string>
+    <string name="pref_revert">Revert translation</string>
 
 </resources>

@@ -1,8 +1,10 @@
 package org.arenaq.czu.spanelstina;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,12 +41,16 @@ public class LessonActivity extends Activity implements View.OnClickListener {
     private Button bOpt5;
     private Button bNext;
 
-    //SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
+    private boolean revertTranslation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        revertTranslation = sharedPreferences.getBoolean("pref_key_revert", false);
 
         this.progress = 0;
         this.mistakes = 0;
@@ -67,7 +73,6 @@ public class LessonActivity extends Activity implements View.OnClickListener {
         usedWords = new ArrayList<Word>();
         currentWordOptions = new ArrayList<Word>();
 
-        //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         db = new Database(this);
 
         int lectureId = getIntent().getIntExtra("lesson_id", -1);
@@ -111,7 +116,8 @@ public class LessonActivity extends Activity implements View.OnClickListener {
 
         current = pickRandomWord(usedWords);
         usedWords.add(current);
-        tvWord.setText(current.getCzech());
+
+        tvWord.setText(revertTranslation ? current.getSpanish() : current.getCzech());
 
         List<Button> shuffledList = new ArrayList<Button>();
         shuffledList.add(bOpt1);
@@ -125,7 +131,7 @@ public class LessonActivity extends Activity implements View.OnClickListener {
 
         Button right_answer = shuffledList.get(0);
         right_answer.setBackgroundResource(android.R.drawable.btn_default);
-        right_answer.setText(current.getSpanish());
+        right_answer.setText(revertTranslation ? current.getCzech() : current.getSpanish());
         right_answer.setEnabled(true);
 
         currentWordOptions.add(current);
@@ -135,7 +141,7 @@ public class LessonActivity extends Activity implements View.OnClickListener {
             currentWordOptions.add(word);
             Button button = shuffledList.get(i);
             button.setBackgroundResource(android.R.drawable.btn_default);
-            button.setText(word.getSpanish());
+            button.setText(revertTranslation ? word.getCzech() : word.getSpanish());
             button.setEnabled(true);
         }
 
@@ -159,7 +165,8 @@ public class LessonActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (current.getSpanish().compareTo(((Button) v).getText().toString()) == 0) {
+        String textToCompare = revertTranslation ? current.getCzech() : current.getSpanish();
+        if (((Button) v).getText() == textToCompare) {
             v.setBackgroundColor(Color.GREEN);
             answerFound = true;
             disableAll();
