@@ -166,7 +166,7 @@ public class LessonActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         String textToCompare = revertTranslation ? current.getCzech() : current.getSpanish();
-        if (((Button) v).getText() == textToCompare) {
+        if (textToCompare.compareTo(((Button) v).getText().toString()) == 0) {
             v.setBackgroundColor(Color.GREEN);
             answerFound = true;
             disableAll();
