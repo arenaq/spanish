@@ -54,14 +54,14 @@ public class LessonActivity extends Activity implements View.OnClickListener {
 
         this.progress = 0;
         this.mistakes = 0;
-        this.tvWord = (TextView)findViewById(R.id.word);
-        this.tvScore = (TextView)findViewById(R.id.score);
-        this.bOpt1 = (Button)findViewById(R.id.opt1);
-        this.bOpt2 = (Button)findViewById(R.id.opt2);
-        this.bOpt3 = (Button)findViewById(R.id.opt3);
-        this.bOpt4 = (Button)findViewById(R.id.opt4);
-        this.bOpt5 = (Button)findViewById(R.id.opt5);
-        this.bNext = (Button)findViewById(R.id.next);
+        this.tvWord = findViewById(R.id.word);
+        this.tvScore = findViewById(R.id.score);
+        this.bOpt1 = findViewById(R.id.opt1);
+        this.bOpt2 = findViewById(R.id.opt2);
+        this.bOpt3 = findViewById(R.id.opt3);
+        this.bOpt4 = findViewById(R.id.opt4);
+        this.bOpt5 = findViewById(R.id.opt5);
+        this.bNext = findViewById(R.id.next);
 
         bOpt1.setOnClickListener(this);
         bOpt2.setOnClickListener(this);
