@@ -17,17 +17,25 @@ import org.arenaq.czu.spanelstina.database.model.Lecture;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+    @BindView(R.id.lessons)
+    Button lessons;
+
+    @BindView(R.id.statistics)
+    Button statistics;
+
+    @BindView(R.id.exit)
+    Button exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button lessons = findViewById(R.id.lessons);
-        Button statistics = findViewById(R.id.statistics);
-        Button exit = findViewById(R.id.exit);
+        ButterKnife.bind(this);
 
         lessons.setOnClickListener(new View.OnClickListener() {
             @Override
