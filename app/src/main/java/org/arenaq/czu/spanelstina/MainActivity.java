@@ -8,7 +8,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
@@ -19,6 +18,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.lessons)
@@ -36,28 +37,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+    }
 
-        lessons.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pickLesson().show();
-            }
-        });
+    @OnClick(R.id.lessons)
+    protected void showLessonPicker() {
+        pickLesson().show();
+    }
 
-        statistics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
-                startActivity(intent);
-            }
-        });
+    @OnClick(R.id.statistics)
+    protected void showStatistics() {
+        Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
+        startActivity(intent);
+    }
 
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    @OnClick(R.id.exit)
+    protected void exitApplication() {
+        finish();
     }
 
     protected Dialog pickLesson() {
