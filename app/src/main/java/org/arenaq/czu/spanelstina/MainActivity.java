@@ -22,14 +22,14 @@ import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity {
-    Button lessons;
     @BindView(R.id.btnLessons)
+    Button btnLessons;
 
-    Button statistics;
     @BindView(R.id.btnStatistics)
+    Button btnStatistics;
 
-    Button exit;
     @BindView(R.id.btnExit)
+    Button btnExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
