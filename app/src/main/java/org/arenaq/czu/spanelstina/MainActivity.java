@@ -22,14 +22,14 @@ import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.lessons)
     Button lessons;
+    @BindView(R.id.btnLessons)
 
-    @BindView(R.id.statistics)
     Button statistics;
+    @BindView(R.id.btnStatistics)
 
-    @BindView(R.id.exit)
     Button exit;
+    @BindView(R.id.btnExit)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +39,18 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.lessons)
+    @OnClick(R.id.btnLessons)
     protected void showLessonPicker() {
         pickLesson().show();
     }
 
-    @OnClick(R.id.statistics)
+    @OnClick(R.id.btnStatistics)
     protected void showStatistics() {
         Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.exit)
+    @OnClick(R.id.btnExit)
     protected void exitApplication() {
         finish();
     }

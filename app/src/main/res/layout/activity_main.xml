@@ -14,19 +14,19 @@
             android:text="@string/lessons"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:id="@+id/lessons"/>
+            android:id="@+id/btnLessons"/>
 
         <Button
             android:text="@string/statistics"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:id="@+id/statistics" />
+            android:id="@+id/btnStatistics" />
 
         <Button
             android:text="@string/exit"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:id="@+id/exit" />
+            android:id="@+id/btnExit" />
     </LinearLayout>
 
 </RelativeLayout>
