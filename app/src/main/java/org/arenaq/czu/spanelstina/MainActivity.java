@@ -1,9 +1,10 @@
 package org.arenaq.czu.spanelstina;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -11,7 +12,6 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-import org.arenaq.czu.spanelstina.database.Database;
 import org.arenaq.czu.spanelstina.database.model.Lecture;
 
 import java.util.List;
@@ -19,9 +19,19 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    @NonNull
+    private CompositeDisposable compositeDisposable;
+
+    @NonNull
+    private MainViewModel viewModel;
+
     @BindView(R.id.btnLessons)
     Button btnLessons;
 
@@ -36,12 +46,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        viewModel = new MainViewModel();
         ButterKnife.bind(this);
+        Environment.getExternalStorageDirectory().get
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bind();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unBind();
+    }
+
+    private void bind() {
+        compositeDisposable = new CompositeDisposable();
+
+        compositeDisposable.add(viewModel.requestLessonsList(this)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::showLessonPicker));
+    }
+
+    private void unBind() {
+        compositeDisposable.clear();
     }
 
     @OnClick(R.id.btnLessons)
-    protected void showLessonPicker() {
-        pickLesson().show();
+    protected void requestLessonsList() {
+        viewModel.requestLessonsList(this);
     }
 
     @OnClick(R.id.btnStatistics)
@@ -55,10 +92,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    protected Dialog pickLesson() {
-        Database db = new Database(this);
-        List<Lecture> lectures = db.getAllLectures();
-
+    protected void showLessonPicker(List<Lecture> lectures) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.lessons_dialog_title);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_item);
@@ -86,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.setCancelable(true);
-        return builder.create();
+        builder.create().show();
     }
 
 
